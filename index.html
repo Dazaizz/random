@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Random Pixel Art</title>
+    <style>
+        body {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+            background-color: #f0f0f0;
+        }
+
+        #pixel-container {
+            display: grid;
+            grid-template-columns: repeat(50, 10px); /* Adjust grid size and number of columns */
+            grid-template-rows: repeat(50, 10px);    /* Adjust grid size and number of rows */
+            gap: 1px;
+        }
+
+        .pixel {
+            width: 10px;
+            height: 10px;
+        }
+    </style>
+</head>
+<body>
+    <div id="pixel-container"></div>
+    <script>
+        // Function to generate a random color in hex format
+        function getRandomColor() {
+            const letters = '0123456789ABCDEF';
+            let color = '#';
+            for (let i = 0; i < 6; i++) {
+                color += letters[Math.floor(Math.random() * 16)];
+            }
+            return color;
+        }
+
+        // Function to create pixels and add them to the container
+        function createPixels(size) {
+            const container = document.getElementById('pixel-container');
+            container.style.gridTemplateColumns = `repeat(${size}, 10px)`;
+            container.style.gridTemplateRows = `repeat(${size}, 10px)`;
+            container.innerHTML = ''; // Clear any existing pixels
+            for (let i = 0; i < size * size; i++) {
+                const pixel = document.createElement('div');
+                pixel.className = 'pixel';
+                pixel.style.backgroundColor = getRandomColor();
+                container.appendChild(pixel);
+            }
+        }
+
+        // Call the function to create pixels when the page loads
+        window.onload = () => createPixels(50);  // Adjust the grid size here
+    </script>
+</body>
+</html>
